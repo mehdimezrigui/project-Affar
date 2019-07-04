@@ -28,14 +28,15 @@ class Dashboard extends Component {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
+          <div className="dash-container">
           <div className="dashbord-nav">
-            <p className="lead text-muted">
-              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+            <p className="lead text-dark">
+              Welcome <span className='lead text-primary'>{profile.handle}</span>
             </p>
             <div className='nav'>
             {/* <ProfileActions /> */}
             <Link to="/edit-profile">
-            <button className="btn btn-success">Edit Profile</button>
+            <button className="btn btn-primary">Edit Profile</button>
             </Link>
             <div style={{ marginBottom: '60px' }} />
             <button
@@ -45,9 +46,17 @@ class Dashboard extends Component {
               Delete My Account
             </button>
             <Link to="/feed">
-            <button type="button" class="btn btn-warning">New Annoucement</button>
+            <button type="button" class="btn btn-success">New Annoucement</button>
             </Link>
             </div>
+          </div>
+
+          <div className="profile-info">
+          <span><i class="fas fa-home"></i>  {profile.adress}, {profile.region}, {profile.cp}, {profile.country}</span>
+          <span><i class="fas fa-phone"></i>  {profile.phone}</span>
+          <span><i class="fas fa-envelope"></i> {user.email}</span>
+          </div>
+
           </div>
         );
       } else {
@@ -69,7 +78,6 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              {/* <h1 className="display-4">Dashboard</h1> */}
               {dashboardContent}
             </div>
           </div>

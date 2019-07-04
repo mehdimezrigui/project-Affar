@@ -64,3 +64,11 @@ img {
 .nav button{
   height: 35px;
 }
+.dash-container{
+  display: flex;
+  flex-direction: column;
+}
+.profile-info{
+  display: flex;
+  justify-content: space-between;
+}

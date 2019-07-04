@@ -63,7 +63,8 @@ class CreateProfile extends Component {
       { label: 'Zaghouan', value: 'Zaghouan' },
       { label: 'Beja', value: 'Beja' },
       { label: 'Touzer', value: 'Touzer' },
-      { label: 'Gabes', value: 'Gabes' }
+      { label: 'Gabes', value: 'Gabes' },
+      { label: 'Nabel', value: 'Nabel' }
     ];
     const regions = [
       {district: '', label: 'Select Region', value: '' },
@@ -74,7 +75,9 @@ class CreateProfile extends Component {
       {district: 'Ariana',label: 'Borj Lozir', value: 'Borj Lozir' },
       {district: 'Ariana', label: 'Chotrana I', value: 'Chotrana I' },
       {district: 'Ben Arous', label: 'Zahra', value: 'Zahra' },
-      {district: 'Ben Arous', label: 'Borj Sedria', value: 'Borj Sedria' }
+      {district: 'Ben Arous', label: 'Borj Sedria', value: 'Borj Sedria' },
+      {district: 'Manouba', label: 'Douar hicher', value: 'Douar hicher' },
+      {district: 'Nabel', label: 'kélibia', value: 'kélibia' }
     ];
 
     return (
@@ -118,7 +121,7 @@ class CreateProfile extends Component {
                   value={this.state.country}
                   onChange={this.onChange}
                   options={country}
-                  error={errors.ville}
+                  error={errors.country}
                   info="Select your Country"
                 />
                 <SelectListGroup

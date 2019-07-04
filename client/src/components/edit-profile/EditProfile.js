@@ -86,8 +86,10 @@ class CreateProfile extends Component {
       { label: 'Zaghouan', value: 'Zaghouan' },
       { label: 'Beja', value: 'Beja' },
       { label: 'Touzer', value: 'Touzer' },
-      { label: 'Gabes', value: 'Gabes' }
+      { label: 'Gabes', value: 'Gabes' },
+      { label: 'Nabel', value: 'Nabel' }
     ];
+  
     const regions = [
       {district: '', label: 'Select Region', value: '' },
       {district: 'Tunis', label: 'La Marsa', value: 'La Marsa' },
@@ -97,7 +99,9 @@ class CreateProfile extends Component {
       {district: 'Ariana',label: 'Borj Lozir', value: 'Borj Lozir' },
       {district: 'Ariana', label: 'Chotrana I', value: 'Chotrana I' },
       {district: 'Ben Arous', label: 'Zahra', value: 'Zahra' },
-      {district: 'Ben Arous', label: 'Borj Sedria', value: 'Borj Sedria' }
+      {district: 'Ben Arous', label: 'Borj Sedria', value: 'Borj Sedria' },
+      {district: 'Manouba', label: 'Douar hicher', value: 'Douar hicher' },
+      {district: 'Nabel', label: 'kélibia', value: 'kélibia' }
     ];
 
 
