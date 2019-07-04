@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import InputGroup from '../common/InputGroup';
+
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
+
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -14,18 +14,11 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: '',
-      company: '',
-      website: '',
-      location: '',
-      status: '',
-      // skills: '',
-      // githubusername: '',
-      // bio: '',
-      // twitter: '',
-      // facebook: '',
-      // linkedin: '',
-      // youtube: '',
-      // instagram: '',
+      phone: '',
+      adress: '',
+      country: '',
+      region: '',
+      cp:'',
       errors: {}
     };
 
@@ -38,100 +31,50 @@ class CreateProfile extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-
+  
   onSubmit(e) {
     e.preventDefault();
 
     const profileData = {
       handle: this.state.handle,
-      company: this.state.company,
-      website: this.state.website,
-      location: this.state.location,
-      status: this.state.status,
-      // skills: this.state.skills,
-      // githubusername: this.state.githubusername,
-      // bio: this.state.bio,
-      // twitter: this.state.twitter,
-      // facebook: this.state.facebook,
-      // linkedin: this.state.linkedin,
-      // youtube: this.state.youtube,
-      // instagram: this.state.instagram
+      phone: this.state.phone,
+      adress: this.state.adress,
+      country: this.state.country,
+      region: this.state.region,
+      cp: this.state.cp
     };
+
 
     this.props.createProfile(profileData, this.props.history);
   }
-
+     // Select options for status
+     
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   render() {
-    const { errors, displaySocialInputs } = this.state;
-
-    // let socialInputs;
-
-    // if (displaySocialInputs) {
-    //   socialInputs = (
-    //     <div>
-    //       <InputGroup
-    //         placeholder="Twitter Profile URL"
-    //         name="twitter"
-    //         icon="fab fa-twitter"
-    //         value={this.state.twitter}
-    //         onChange={this.onChange}
-    //         error={errors.twitter}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Facebook Page URL"
-    //         name="facebook"
-    //         icon="fab fa-facebook"
-    //         value={this.state.facebook}
-    //         onChange={this.onChange}
-    //         error={errors.facebook}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Linkedin Profile URL"
-    //         name="linkedin"
-    //         icon="fab fa-linkedin"
-    //         value={this.state.linkedin}
-    //         onChange={this.onChange}
-    //         error={errors.linkedin}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="YouTube Channel URL"
-    //         name="youtube"
-    //         icon="fab fa-youtube"
-    //         value={this.state.youtube}
-    //         onChange={this.onChange}
-    //         error={errors.youtube}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Instagram Page URL"
-    //         name="instagram"
-    //         icon="fab fa-instagram"
-    //         value={this.state.instagram}
-    //         onChange={this.onChange}
-    //         error={errors.instagram}
-    //       />
-    //     </div>
-    //   );
-    // }
-
-    // Select options for status
-    const options = [
-      { label: '* Select Professional Status', value: 0 },
-      { label: 'Developer', value: 'Developer' },
-      { label: 'Junior Developer', value: 'Junior Developer' },
-      { label: 'Senior Developer', value: 'Senior Developer' },
-      { label: 'Manager', value: 'Manager' },
-      { label: 'Student or Learning', value: 'Student or Learning' },
-      { label: 'Instructor or Teacher', value: 'Instructor or Teacher' },
-      { label: 'Intern', value: 'Intern' },
-      { label: 'Other', value: 'Other' }
+    const { errors} = this.state;
+    const country = [
+      { label: 'Select Country', value: 0 },
+      { label: 'Tunis', value: 'Tunis' },
+      { label: 'Ariana', value: 'Ariana' },
+      { label: 'Ben Arous', value: 'Ben Arous' },
+      { label: 'Manouba', value: 'Manouba' },
+      { label: 'Zaghouan', value: 'Zaghouan' },
+      { label: 'Beja', value: 'Beja' },
+      { label: 'Touzer', value: 'Touzer' },
+      { label: 'Gabes', value: 'Gabes' }
+    ];
+    const regions = [
+      {district: '', label: 'Select Region', value: '' },
+      {district: 'Tunis', label: 'La Marsa', value: 'La Marsa' },
+      {district: 'Tunis',label: 'Lac I', value: 'Lac I' },
+      {district: 'Tunis',label: 'Carthage', value: 'Carthage' },
+      {district: 'Ariana', label: 'La Soukra', value: 'La Soukra' },
+      {district: 'Ariana',label: 'Borj Lozir', value: 'Borj Lozir' },
+      {district: 'Ariana', label: 'Chotrana I', value: 'Chotrana I' },
+      {district: 'Ben Arous', label: 'Zahra', value: 'Zahra' },
+      {district: 'Ben Arous', label: 'Borj Sedria', value: 'Borj Sedria' }
     ];
 
     return (
@@ -143,7 +86,6 @@ class CreateProfile extends Component {
               <p className="lead text-center">
                 Let's get some information to make your profile stand out
               </p>
-              <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -151,82 +93,52 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  info="A unique handle for your profile URL."
+                />
+                <TextFieldGroup
+                  placeholder="Phone"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.onChange}
+                  error={errors.phone}
+                  info="Create your phone number"
+                />
+                <TextFieldGroup
+                  placeholder="Adress"
+                  name="adress"
+                  value={this.state.adress}
+                  onChange={this.onChange}
+                  error={errors.adress}
+                  info="Create your adress"
+                />
+                <div className="adress-info">
+                <SelectListGroup
+                  placeholder="Country"
+                  name="country"
+                  value={this.state.country}
+                  onChange={this.onChange}
+                  options={country}
+                  error={errors.ville}
+                  info="Select your Country"
                 />
                 <SelectListGroup
-                  placeholder="Status"
-                  name="status"
-                  value={this.state.status}
+                  placeholder="Region"
+                  name="region"
+                  value={this.state.region}
                   onChange={this.onChange}
-                  options={options}
-                  error={errors.status}
-                  info="Give us an idea of where you are at in your career"
+                  options={regions.filter(el=> el.district===this.state.country || el.district==='')}
+                  error={errors.region}
+                  info="Select your region"
                 />
                 <TextFieldGroup
-                  placeholder="Company"
-                  name="company"
-                  value={this.state.company}
+                  placeholder="Code Postal"
+                  name="cp"
+                  value={this.state.cp}
                   onChange={this.onChange}
-                  error={errors.company}
-                  info="Could be your own company or one you work for"
+                  error={errors.cp}
+                  info="Create your postal code"
                 />
-                <TextFieldGroup
-                  placeholder="Website"
-                  name="website"
-                  value={this.state.website}
-                  onChange={this.onChange}
-                  error={errors.website}
-                  info="Could be your own website or a company one"
-                />
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="City or city & state suggested (eg. Boston, MA)"
-                />
-                {/* <TextFieldGroup
-                  placeholder="* Skills"
-                  name="skills"
-                  value={this.state.skills}
-                  onChange={this.onChange}
-                  error={errors.skills}
-                  info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP"
-                />
-                <TextFieldGroup
-                  placeholder="Github Username"
-                  name="githubusername"
-                  value={this.state.githubusername}
-                  onChange={this.onChange}
-                  error={errors.githubusername}
-                  info="If you want your latest repos and a Github link, include your username"
-                />
-                <TextAreaFieldGroup
-                  placeholder="Short Bio"
-                  name="bio"
-                  value={this.state.bio}
-                  onChange={this.onChange}
-                  error={errors.bio}
-                  info="Tell us a little about yourself"
-                /> */}
-
-                {/* <div className="mb-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
-                    }}
-                    className="btn btn-light"
-                  >
-                    Add Social Network Links
-                  </button>
-                  <span className="text-muted">Optional</span>
                 </div>
-                {socialInputs} */}
                 <input
                   type="submit"
                   value="Submit"

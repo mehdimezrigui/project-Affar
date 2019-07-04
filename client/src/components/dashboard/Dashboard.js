@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
-// import Experience from './Experience';
-// import Education from './Education';
+
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,13 +28,15 @@ class Dashboard extends Component {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div>
+          <div className="dashbord-nav">
             <p className="lead text-muted">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
-            <ProfileActions />
-            {/* <Experience experience={profile.experience} />
-            <Education education={profile.education} /> */}
+            <div className='nav'>
+            {/* <ProfileActions /> */}
+            <Link to="/edit-profile">
+            <button className="btn btn-success">Edit Profile</button>
+            </Link>
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
@@ -43,6 +44,10 @@ class Dashboard extends Component {
             >
               Delete My Account
             </button>
+            <Link to="/feed">
+            <button type="button" class="btn btn-warning">New Annoucement</button>
+            </Link>
+            </div>
           </div>
         );
       } else {
@@ -60,11 +65,11 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className="dashboard">
+      <div className="dashboard style">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
+              {/* <h1 className="display-4">Dashboard</h1> */}
               {dashboardContent}
             </div>
           </div>

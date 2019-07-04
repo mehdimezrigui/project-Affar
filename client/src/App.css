@@ -4,10 +4,10 @@ img {
 
 .landing {
   position: relative;
-  background: url('./img/showcase.jpg') no-repeat;
+  background: url('./img/banner.png') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 81vh;
   margin-top: -24px;
   margin-bottom: -50px;
 }
@@ -17,7 +17,7 @@ img {
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
   left: 0;
@@ -37,8 +37,30 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
-.footer-style{
-  position: relative;
-  bottom: 0;
-  
+.style{
+  height: 69.5vh;
+}
+.adress-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.adress-info > * {
+  flex: 1;
+  margin: 0 !important;
+}
+.adress-info > :nth-child(2) {
+  margin: 0 15px !important;
+}
+.dashbord-nav{
+  display: flex;
+  justify-content: space-between;
+}
+.nav{
+  display: flex;
+  justify-content: space-between;
+  width: 428px;
+}
+.nav button{
+  height: 35px;
 }

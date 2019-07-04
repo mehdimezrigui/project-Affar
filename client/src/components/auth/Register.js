@@ -53,7 +53,7 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="register">
+      <div className="register style">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
