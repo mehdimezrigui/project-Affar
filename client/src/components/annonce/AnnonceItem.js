@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { deleteAnnonce} from '../../actions/annonceActions';
+import { deleteAnnonce, getAnnonces} from '../../actions/annonceActions';
 import CardItem from './CardItem';
 
 class AnnonceItem extends Component {
+  componentDidMount=()=>{
+    {console.log("annonces",this.props.annonce)}
+  }
   onDeleteClick(id) {
     this.props.deleteAnnonce(id);
   }
@@ -17,7 +20,8 @@ class AnnonceItem extends Component {
 
     return (
      <div>
-     {/* <CardItem  delete={this.onDeleteClick}/> */}
+       
+     <CardItem  delete={this.onDeleteClick}/>
      </div>
     );
   }
@@ -28,9 +32,9 @@ AnnonceItem.defaultProps = {
 };
 
 AnnonceItem.propTypes = {
-  deletePost: PropTypes.func.isRequired,
+  deleteAnnonce: PropTypes.func.isRequired,
+  getAnnonces: PropTypes.func.isRequired,
   addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
   annonce: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -40,6 +44,6 @@ const mapStateToProps = state => ({
   annonce: state.annonce
 });
 
-export default connect(mapStateToProps, { deleteAnnonce})(
+export default connect(mapStateToProps, {getAnnonces, deleteAnnonce})(
   AnnonceItem
 );
