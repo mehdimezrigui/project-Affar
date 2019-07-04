@@ -45,7 +45,7 @@ class Dashboard extends Component {
             >
               Delete My Account
             </button>
-            <Link to="/feed">
+            <Link to="/annoucement">
             <button type="button" class="btn btn-success">New Annoucement</button>
             </Link>
             </div>

@@ -20,10 +20,9 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
-import Posts from './components/posts/Posts';
-import Post from './components/post/Post';
+import Annonce from './components/annonce/Annonce';
 import NotFound from './components/not-found/NotFound';
-
+import AnnonceItem from './components/annonce/AnnonceItem';
 import './App.css';
 
 // Check for token
@@ -78,10 +77,10 @@ class App extends Component {
                 />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/feed" component={Posts} />
+                <PrivateRoute exact path="/annoucement" component={Annonce} />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/post/:id" component={Post} />
+                <PrivateRoute exact path="/annoucement/:id" component={AnnonceItem} />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>

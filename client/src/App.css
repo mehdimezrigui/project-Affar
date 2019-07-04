@@ -72,3 +72,10 @@ img {
   display: flex;
   justify-content: space-between;
 }
+.search{
+  width: 30%;
+  display: flex;
+}
+.search input{
+  height:30px ;
+}

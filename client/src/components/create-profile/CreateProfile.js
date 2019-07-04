@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
 
@@ -43,7 +42,6 @@ class CreateProfile extends Component {
       region: this.state.region,
       cp: this.state.cp
     };
-
 
     this.props.createProfile(profileData, this.props.history);
   }

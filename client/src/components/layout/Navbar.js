@@ -17,11 +17,7 @@ class Navbar extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
-        {/* <li className="nav-item">
-          <Link className="nav-link" to="/feed">
-            New Annoucement
-          </Link>
-        </li> */}
+        
         <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             Dashboard
@@ -67,6 +63,9 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             L'Affar
           </Link>
+            <div className="search">
+            <input type="text" class="form-control" placeholder="Search annoucment" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+            </div>
           <button
             className="navbar-toggler"
             type="button"

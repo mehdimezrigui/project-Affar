@@ -4,47 +4,47 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Post model
-const Post = require('../../models/Post');
+const Post = require('../../models/Annonce');
 // Profile model
 const Profile = require('../../models/Profile');
 
 // Validation
-const validatePostInput = require('../../validation/post');
+const validateAnnoucementInput = require('../../validation/annonce');
 
 // @route   GET api/posts/test
 // @desc    Tests post route
 // @access  Public
-router.get('/test', (req, res) => res.json({ msg: 'Posts Works' }));
+router.get('/test', (req, res) => res.json({ msg: 'Annoucement Works' }));
 
-// @route   GET api/posts
+// @route   GET api/annoucement
 // @desc    Get posts
 // @access  Public
 router.get('/', (req, res) => {
-  Post.find()
+  Annonce.find()
     .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+    .then(annonces => res.json(annonces))
+    .catch(err => res.status(404).json({ nopostsfound: 'No Annoucement found' }));
 });
 
-// @route   GET api/posts/:id
-// @desc    Get post by id
+// @route   GET api/annoucement/:id
+// @desc    Get annoucement by id
 // @access  Public
 router.get('/:id', (req, res) => {
-  Post.findById(req.params.id)
-    .then(post => res.json(post))
+  Annonce.findById(req.params.id)
+    .then(annonce => res.json(annonce))
     .catch(err =>
-      res.status(404).json({ nopostfound: 'No post found with that ID' })
+      res.status(404).json({ nopostfound: 'No Annoucement found with that ID' })
     );
 });
 
-// @route   POST api/posts
-// @desc    Create post
+// @route   POST api/annoucement
+// @desc    Create annoucement
 // @access  Private
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
+    const { errors, isValid } = validateAnnoucementInput(req.body);
 
     // Check Validation
     if (!isValid) {
@@ -52,105 +52,45 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const newPost = new Post({
-      text: req.body.text,
-      name: req.body.name,
+    const newAnnonce = new Annonce({
       avatar: req.body.avatar,
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      condition: req.body.condition,
+      etat: req.body.etat,
       user: req.user.id
     });
 
-    newPost.save().then(post => res.json(post));
+    newAnnonce.save().then(annonce => res.json(annonce));
   }
 );
 
-// @route   DELETE api/posts/:id
-// @desc    Delete post
+// @route   DELETE api/annoucement/:id
+// @desc    Delete annoucement
 // @access  Private
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
-        .then(post => {
-          // Check for post owner
-          if (post.user.toString() !== req.user.id) {
+      Annonce.findOneAndRemove({_id:req.params.id})
+        .then(annonce => {
+          // Check for annoucement owner
+          if (annonce.user.toString() !== req.user.id) {
             return res
               .status(401)
               .json({ notauthorized: 'User not authorized' });
           }
 
           // Delete
-          post.remove().then(() => res.json({ success: true }));
+          Annonce.remove().then(() => res.json({ success: true }));
         })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+        .catch(err => res.status(404).json({ annoncenotfound: 'No annoucement found' }));
     });
   }
 );
 
-// @route   POST api/posts/like/:id
-// @desc    Like post
-// @access  Private
-router.post(
-  '/like/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
-        .then(post => {
-          if (
-            post.likes.filter(like => like.user.toString() === req.user.id)
-              .length > 0
-          ) {
-            return res
-              .status(400)
-              .json({ alreadyliked: 'User already liked this post' });
-          }
-
-          // Add user id to likes array
-          post.likes.unshift({ user: req.user.id });
-
-          post.save().then(post => res.json(post));
-        })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
-    });
-  }
-);
-
-// @route   POST api/posts/unlike/:id
-// @desc    Unlike post
-// @access  Private
-router.post(
-  '/unlike/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
-        .then(post => {
-          if (
-            post.likes.filter(like => like.user.toString() === req.user.id)
-              .length === 0
-          ) {
-            return res
-              .status(400)
-              .json({ notliked: 'You have not yet liked this post' });
-          }
-
-          // Get remove index
-          const removeIndex = post.likes
-            .map(item => item.user.toString())
-            .indexOf(req.user.id);
-
-          // Splice out of array
-          post.likes.splice(removeIndex, 1);
-
-          // Save
-          post.save().then(post => res.json(post));
-        })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
-    });
-  }
-);
 
 // @route   POST api/posts/comment/:id
 // @desc    Add comment to post

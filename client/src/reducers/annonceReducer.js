@@ -1,14 +1,14 @@
 import {
-  ADD_POST,
-  GET_POSTS,
-  GET_POST,
-  DELETE_POST,
+  ADD_ANNONCE,
+  GET_ANNONCES,
+  GET_ANNONCE,
+  DELETE_ANNONCE,
   POST_LOADING
 } from '../actions/types';
 
 const initialState = {
-  posts: [],
-  post: {},
+  annonces: [],
+  annonce: {},
   loading: false
 };
 
@@ -19,27 +19,27 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case GET_POSTS:
+    case GET_ANNONCES:
       return {
         ...state,
-        posts: action.payload,
+        annonces: action.payload,
         loading: false
       };
-    case GET_POST:
+    case GET_ANNONCE:
       return {
         ...state,
-        post: action.payload,
+        annonce: action.payload,
         loading: false
       };
-    case ADD_POST:
+    case ADD_ANNONCE:
       return {
         ...state,
-        posts: [action.payload, ...state.posts]
+        annonces: [action.payload, ...state.annonces]
       };
-    case DELETE_POST:
+    case DELETE_ANNONCE:
       return {
         ...state,
-        posts: state.posts.filter(post => post._id !== action.payload)
+        annonces: state.annonce.filter(annonce => annonce._id !== action.payload)
       };
     default:
       return state;
