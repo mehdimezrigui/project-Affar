@@ -18,7 +18,7 @@ module.exports = function validateAnnoucementInput(data) {
     errors.title = 'Title field is required';
   }
   if (Validator.isEmpty(data.description)) {
-    errors.desciption = 'Description field is required';
+    errors.description = 'Description field is required';
   }
   if (Validator.isEmpty(data.price)) {
     errors.price = 'Price field is required'

@@ -9,11 +9,17 @@ import {
 const initialState = {
   annonces: [],
   annonce: {},
-  loading: false
+  loading: false,
+  search :''
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case "SEARCH_ITEM":
+      return {
+        ...state,
+        search: action.payload
+      };
     case POST_LOADING:
       return {
         ...state,

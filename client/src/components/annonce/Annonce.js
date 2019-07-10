@@ -22,6 +22,7 @@ class Annonce extends Component {
         if (nextProps.errors) {
           this.setState({ errors: nextProps.errors });
         }
+        console.log(this.state.errors)
       }
       
       onSubmit=(e)=> {
@@ -57,12 +58,12 @@ class Annonce extends Component {
               <h1 className="display-4 text-center">Create Your Annoucement</h1>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="Avatar"
+                  placeholder="Picture"
                   name="avatar"
                   value={this.state.avatar}
                   onChange={this.onChange}
-                //   error={errors.avatar}
-                  info="Upload same avatar for your annoucement."
+                  error={errors.avatar}
+                  info="Upload same picture for your annoucement."
                 />
                 <TextFieldGroup
                   placeholder="Title"
@@ -77,7 +78,7 @@ class Annonce extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}
-                //   error={errors.description}
+                  error={errors.description}
                   info="Create same description for your annoucement "
                 />
                 <TextFieldGroup
@@ -85,22 +86,23 @@ class Annonce extends Component {
                   name="price"
                   value={this.state.price}
                   onChange={this.onChange}
-                //   error={errors.price}
+                  error={errors.price}
                   info="Make the price of your annoucement"
                   />
-                <TextFieldGroup
+                {/* <TextFieldGroup
                   placeholder="Condition"
                   name="condition"
                   value={this.state.condition}
                   onChange={this.onChange}
                 //   error={errors.condition}
                 
-                />
+                /> */}
                 <TextFieldGroup
                   placeholder="Etat Offre"
                   name="etat"
                   value={this.state.etat}
                   onChange={this.onChange}
+                  error={errors.etat}
                 />
                
                 <input

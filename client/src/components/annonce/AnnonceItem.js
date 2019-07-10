@@ -6,22 +6,23 @@ import { Link } from 'react-router-dom';
 import { deleteAnnonce, getAnnonces} from '../../actions/annonceActions';
 import CardItem from './CardItem';
 
+
 class AnnonceItem extends Component {
   componentDidMount=()=>{
-    {console.log("annonces",this.props.annonce)}
+    this.props.getAnnonces()
   }
-  onDeleteClick(id) {
-    this.props.deleteAnnonce(id);
-  }
+
 
 
   render() {
-    const { annonce, auth, showActions } = this.props;
-
+    const { annonces} = this.props.annonce;
+ const {id}  = this.props.auth.user
     return (
      <div>
-       
-     <CardItem  delete={this.onDeleteClick}/>
+       <h3>My Annoucement</h3>
+       <div className="mes-annonces">
+       {!annonces?<h2>No annonce found</h2>:annonces.filter ( el => el.user ===id ) .map(el => <CardItem  annonce={el} />)}
+       </div>
      </div>
     );
   }
@@ -32,18 +33,17 @@ AnnonceItem.defaultProps = {
 };
 
 AnnonceItem.propTypes = {
-  deleteAnnonce: PropTypes.func.isRequired,
   getAnnonces: PropTypes.func.isRequired,
-  addLike: PropTypes.func.isRequired,
+  deleteAnnonce: PropTypes.func.isRequired,
   annonce: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+ 
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  annonce: state.annonce
+  annonce: state.annonce,
+  auth : state.auth
 });
 
-export default connect(mapStateToProps, {getAnnonces, deleteAnnonce})(
+export default connect(mapStateToProps, {getAnnonces,deleteAnnonce})(
   AnnonceItem
 );

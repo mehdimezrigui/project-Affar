@@ -4,12 +4,17 @@ img {
 
 .landing {
   position: relative;
-  background: url('./img/banner.png') no-repeat;
+  /* background: url('./img/banner.png') no-repeat; */
   background-size: cover;
   background-position: center;
-  height: 81vh;
-  margin-top: -24px;
+  min-height: 85vh;
+  margin-top: 30px;
   margin-bottom: -50px;
+ 
+}
+.barprogress{
+  width: 60%;
+  text-align: center;
 }
 
 .landing-inner {
@@ -17,7 +22,7 @@ img {
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.05);
   position: absolute;
   top: 0;
   left: 0;
@@ -38,7 +43,8 @@ img {
   color: #bbb !important;
 }
 .style{
-  height: 69.5vh;
+  min-height: 69.5vh;
+  margin-top: 100px;
 }
 .adress-info {
   width: 100%;
@@ -78,4 +84,36 @@ img {
 }
 .search input{
   height:30px ;
+}
+.card-style{
+  width: 18rem;
+  margin: 5px;
+}
+.delete{
+  position: absolute;
+  top:2px;
+  right: 8px;
+}
+.main-box{
+  display: flex;
+  justify-content: space-between;
+}
+.text{
+  color:Black;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 80px;
+}
+.mes-annonces{
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+.btstyle{
+  width: 80px;
+  margin: 10px;
+}
+.btn-section{
+  display: flex;
+  justify-content: space-around;
 }

@@ -69,24 +69,30 @@ export const getAnnonce = id => dispatch => {
 };
 
 // Delete annonce
-export const deleteAnnonce = id => dispatch => {
+export const deleteAnnonce = id => dispatch =>  {
   axios
-    .delete(`/api/annoucement/${id}`)
-    .then(res =>
-      dispatch({
-        type: DELETE_ANNONCE,
-        payload: id
-      })
-    )
+    .delete(`/api/annoucement/${id}`).then(res => dispatch(getAnnonces()) )
+    // .then(res =>
+    //   dispatch({
+    //     type: DELETE_ANNONCE,
+    //     payload: id
+    //   })
+      
+    // )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response ? err.response.data : err
       })
     );
 };
 
-
+ export const searchItem  = (payload) => {
+  return {
+    type : 'SEARCH_ITEM',
+    payload
+  }
+}
 
 // Set loading state
 export const setAnnonceLoading = () => {

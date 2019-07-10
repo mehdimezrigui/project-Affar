@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
-
+import { searchItem} from '../../actions/annonceActions'
 class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
+    
   }
-
+  onchange = (e) => {
+    this.props.searchItem(e.target.value)
+  }
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -58,13 +61,13 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4 fixed-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
             L'Affar
           </Link>
             <div className="search">
-            <input type="text" class="form-control" placeholder="Search annoucment" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+            <input type="text" onChange={this.onchange} class="form-control" placeholder="Search annoucment" aria-label="Recipient's username" aria-describedby="basic-addon2" />
             </div>
           <button
             className="navbar-toggler"
@@ -101,6 +104,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(
+export default connect(mapStateToProps, { searchItem, logoutUser, clearCurrentProfile })(
   Navbar
 );
